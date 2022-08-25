@@ -5,11 +5,11 @@
 <h1>Edit Post </h1>
 <form  action="{{route("post.update",$post->id)}}" method="POST">
     @method("put")
-    {{--  --}}
+   
 
     @csrf
     <div class="mb-3">
-        <label class="form-label">Post Title</label>
+        <label class="form-label">Post Title111</label>
         <input type="text"  name="title" class="form-control" value="{{$post->title}}" >
     </div>
     <div class="mb-3">
