@@ -26,6 +26,7 @@
 </head>
 
 <body>
+    @include('sweetalert::alert')
 
     <nav  class="navbar navbar-expand-lg bg-light">
         <div  class="container-fluid nav1">
@@ -49,6 +50,9 @@
                     </li>
                     <li class="nav-item">
                         <a style="color: white;" class="navitems1 nav-link active" aria-current="page" href="/posts">Dynamic Posts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="color: white;" class="navitems1 nav-link active" aria-current="page" href="/postrs"> Posts Resource Controller</a>
                     </li>
 
             </div>

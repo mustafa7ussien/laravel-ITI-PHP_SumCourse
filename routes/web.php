@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\PostrController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,6 +71,11 @@ Route::get("/posts/{id}/edit",[PostController::class, "edit"])->name("post.edit"
 
 //update
  Route::put("/posts/{id}", [PostController::class, "update"])->name("post.update");
+
+ //resources controlere and model
+//for all route crud operation
+Route::resource("postrs",PostrController::class);
+
 
 
 
