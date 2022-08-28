@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
-@section('main')
+@section('content')
+<div class="container">
 
 <table class="table">
     <thead>
@@ -9,6 +10,7 @@
           
             <th>ID</th>
             <th>Title</th>
+            <th>Author</th>
             <th>Body</th>
             <th>Details</th>
             <th>Image</th>
@@ -20,6 +22,7 @@
 
             <td >{{$p->id}}</td>
             <td>{{$p->title}}</td>
+            <td><a href="{{$p->author_id?route("authors.show",$p->author_id):''}}">{{$p->author?$p->author->name:""}} </a></td>
             <td>{{$p->body}}</td>
             <td>{{$p->detail}}</td>
             <td><img style="width:100%;height:5rem" src="{{asset('postimages/'.$p->image)}}" class="card-img-top" alt="..."></td>
@@ -39,5 +42,7 @@
         </tbody>
     </table>
     <a href="{{route("postrs.create")}}" class="btn btn-success"> Create new Post  </a>
+
+    </div>
        
 @endsection

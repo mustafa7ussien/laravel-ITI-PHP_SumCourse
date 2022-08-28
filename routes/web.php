@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostrController;
+use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\HomeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -76,7 +79,13 @@ Route::get("/posts/{id}/edit",[PostController::class, "edit"])->name("post.edit"
 //for all route crud operation
 Route::resource("postrs",PostrController::class);
 
+Route::resource("authors", AuthorController::class);
 
 
 
 
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

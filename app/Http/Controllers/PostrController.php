@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Author;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -11,11 +11,31 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class PostrController extends Controller
 {
+
+
+
+
+
+
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+
+
+     public function __construct()
+     {
+        $this->middleware("auth");
+     }
+
+
+
+
+
+
     public function index()
     {
         $posts = Post::all();
@@ -29,7 +49,8 @@ class PostrController extends Controller
      */
     public function create()
     {
-        return view("postsr.create");
+        $authors = Author::all();
+        return view("postsr.create", ["authors"=>$authors]);
     }
 
     /**
@@ -89,7 +110,9 @@ class PostrController extends Controller
      */
     public function edit(Post $postr)
     {
-        return view("postsr.edit", ["postr"=>$postr]);
+       
+        $authors = Author::all();
+        return view("postsr.edit", ["postr"=>$postr, "authors"=>$authors]);
     }
 
     /**

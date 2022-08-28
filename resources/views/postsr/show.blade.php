@@ -5,7 +5,7 @@
 
 
 <div class="card" style="width: 50%; margin:auto; background-color:lightgray">
-    <h1> Post Info </h1>
+    <h1> {{$postr->author? $postr->author->name: ""}} </h1>
     <img style="width:100%;height:10rem" src="{{asset('postimages/'.$postr->image)}}" class="card-img-top" alt="...">
     <div class="card-body">
         <h2 class="card-title"> {{$postr->title}}</h2>

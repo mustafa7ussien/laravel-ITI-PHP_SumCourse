@@ -1,81 +1,91 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Blog</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <style>
-        body {
-            font-size: x-large;
-            top: 0%;
-        }
-        .nav1
-        {
-            background-color: black;
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        }
-        .navitems1
-        {
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        }
-    </style>
+    <title>{{ config('app.name', 'Laravel') }}</title>
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    <!-- Scripts -->
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
-
 <body>
-    @include('sweetalert::alert')
+    <div id="app">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+            <div class="container">
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    {{-- {{ config('app.name', 'Laravel') }} --}}
+                    {{-- <img style="width: 20%;height:29%" src="{{asset('images/bcolor.jpg')}}" alt=""> --}}
+                    {{-- {{asset('images/bcolor.jpg')}} --}}
+                    Askfm
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-    <nav  class="navbar navbar-expand-lg bg-light">
-        <div  class="container-fluid nav1">
-            <a style="color: white;" class="navbar-brand" href="/">Home</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div   class="navitems1 collapse navbar-collapse" id="navbarSupportedContent">
-                <ul  class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li  class="nav-item">
-                        <a style="color: white;" class="navitems1 nav-link active" aria-current="page" href="/contactus">contact us</a>
-                    </li>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Left Side Of Navbar -->
+                    <ul class="navbar-nav me-auto">
 
-                    <li class="nav-item">
-                        <a style="color: white;" class="navitems1 nav-link active" aria-current="page" href="/aboutus">about us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a style="color: white;" class="navitems1 nav-link active" aria-current="page" href="/hardPost">Hard Posts</a>
-                    </li>
-                    <li class="nav-item">
-                        <a style="color: white;" class="navitems1 nav-link active" aria-current="page" href="/posts">Dynamic Posts</a>
-                    </li>
-                    <li class="nav-item">
-                        <a style="color: white;" class="navitems1 nav-link active" aria-current="page" href="/postrs"> Posts Resource Controller</a>
-                    </li>
+                    </ul>
+                 
 
+                    <ul class="navbar-nav me-auto"><li><a href="{{route('postrs.index')}}"> Show Posts</a> </li> </ul>
+                    <ul class="navbar-nav me-auto  "><li><a href="{{route('authors.index')}}"> Show Authors</a></li> </ul>
+                   
+
+                
+                    
+
+                    <!-- Right Side Of Navbar -->
+                    <ul class="navbar-nav ms-auto">
+                        <!-- Authentication Links --> 
+                        @guest
+                            @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                            @endif
+
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                        @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
 
-
-    <div class="container " style="">
-        @yield('main')
+        <main class="">
+            @yield('content')
+        </main>
     </div>
-
-    <div class="container " style="">
-        @yield('contactus')
-    </div>
-    <div class="container " style="">
-        @yield('aboutus')
-    </div>
-
-    
-
-
-
-
 </body>
-
 </html>

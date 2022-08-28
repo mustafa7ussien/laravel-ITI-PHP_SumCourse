@@ -24,6 +24,20 @@
         <input type="file" name="image" class="form-control" value="{{$postr->image}}">
     </div>
 
+    <div class="mb-3">
+        <select class="form-select" aria-label="Default select example" name="author_id">
+            <option  selected disabled>Select author </option>
+
+        @foreach($authors as $author)
+                @if($postr->author_id==$author->id)
+                <option value="{{$author->id}}" selected>{{$author->name}}</option>
+                @else
+                    <option value="{{$author->id}}"> {{$author->name}}</option>
+                @endif
+            @endforeach
+        </select>
+    </div>
+
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
